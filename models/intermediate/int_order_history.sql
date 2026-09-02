@@ -1,10 +1,20 @@
 SELECT
-    DATE_TRUNC(order_date, MONTH) AS month,
-    COUNT(DISTINCT order_id) AS number_of_orders
+    o.order_id,
+    o.client_id,
+    o.order_date,
+    COUNT(previous.order_id) AS previous_orders_12m
 
-FROM {{ ref('stg_orders') }}
+FROM {{ ref('stg_orders') }} o
 
-WHERE EXTRACT(YEAR FROM order_date) = 2026
+LEFT JOIN {{ ref('stg_orders') }} previous
+    ON o.client_id = previous.client_id
+    AND previous.order_date < o.order_date
+    AND previous.order_date >= DATE_SUB(
+        o.order_date,
+        INTERVAL 12 MONTH
+    )
 
-GROUP BY 1
-ORDER BY 1
+GROUP BY
+    o.order_id,
+    o.client_id,
+    o.order_date
