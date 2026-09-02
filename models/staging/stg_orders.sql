@@ -9,6 +9,6 @@ WITH source AS (
 
 )
 
-    FROM {{ source('raw', 'sales') }}
-
-)
+SELECT *
+FROM source
+WHERE order_id IS NOT NULL
