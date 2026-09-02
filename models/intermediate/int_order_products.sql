@@ -1,6 +1,7 @@
 SELECT
-    COUNT(DISTINCT order_id) AS number_of_orders
+    order_id,
+    SUM(quantity) AS qty_product
 
-FROM {{ ref('stg_orders') }}
+FROM {{ ref('stg_sales') }}
 
-WHERE EXTRACT(YEAR FROM order_date) = 2026
+GROUP BY order_id
