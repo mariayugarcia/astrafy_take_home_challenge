@@ -1,25 +1,22 @@
-WITH order_products AS (
-
-    SELECT
-        order_id,
-        SUM(quantity) AS qty_product
-
-    FROM {{ ref('stg_sales') }}
-
-    GROUP BY order_id
-
-)
+{{ config(
+    partition_by={
+        "field": "order_date",
+        "data_type": "date",
+        "granularity": "month"
+    },
+    cluster_by=["client_id"]
+) }}
 
 SELECT
-    DATE_TRUNC(o.order_date, MONTH) AS month,
-    AVG(op.qty_product) AS avg_products_per_order
+    o.order_id,
+    o.client_id,
+    o.order_date,
+    COALESCE(p.qty_product, 0) AS qty_product
 
 FROM {{ ref('stg_orders') }} o
 
-LEFT JOIN order_products op
-    ON o.order_id = op.order_id
+LEFT JOIN {{ ref('int_order_products') }} p
+    ON o.order_id = p.order_id
 
-WHERE EXTRACT(YEAR FROM o.order_date) = 2026
-
-GROUP BY 1
-ORDER BY 1
+WHERE o.order_date >= '2025-01-01'
+  AND o.order_date < '2027-01-01'
