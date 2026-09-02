@@ -85,15 +85,6 @@ The dashboard focuses on:
 - New vs Returning vs VIP customers
 - Monthly trends
 
-## Data Availability
-
-The challenge description states that the provided data covers
-2022–2023, while the exercises request results for 2025 and 2026.
-
-I therefore did not fabricate data for the requested years.
-The transformations are designed to work with 2025 and 2026 data
-when those records are available.
-
  ---
 ***Data availability note**: The challenge description states that the provided data covers
 2022–2023, while the exercises request results for 2025 and 2026.*
