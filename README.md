@@ -6,4 +6,4 @@
 
 **Marts**: contains business-ready tables used for analysis and BI.
 
-This separation keeps transformations modular and makes the models easier to test, maintain and reuse.**
+This separation keeps transformations modular and makes the models easier to test, maintain and reuse.
