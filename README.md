@@ -1,87 +1,80 @@
-# Astrafy Take-Home Challenge
+# Astrafy Take-Home
 
-## Overview
+## Project Overview
 
-This repository contains my solution to the Astrafy Take-Home Challenge.
-
-The project uses dbt and BigQuery to transform order and sales data
-into business-ready models and exposes the resulting data through
-a LookML semantic layer.
-
-## Project Structure
-
-- `models/staging`: cleaning and standardization of source data
-- `models/intermediate`: intermediate transformations
-- `models/marts`: business-ready models
-- `analyses`: SQL queries corresponding to the challenge exercises
-- `tests`: data quality tests
-- `macros`: reusable dbt macros
-- `lookml`: semantic layer
-
-## Data Model
-
-The project follows a simple three-layer architecture:
-
-Raw Data
-→ Staging
-→ Intermediate
-→ Marts
-
-The staging layer contains cleaned source data.
-
-The intermediate layer calculates order-level product quantities
-and customer order history.
-
-The mart layer contains the final business-ready order tables.
-
-## Customer Segmentation
-
-Orders are segmented according to the number of orders made by the
-same customer during the previous 12 months:
-
-- New: 0 previous orders
-- Returning: 1–3 previous orders
-- VIP: 4 or more previous orders
-
-The current order is not included in the calculation.
-
-## Data Quality
-
-The project includes `not_null`, `unique` and `accepted_values`
-tests, as well as a singular test for customer segmentation.
-
-## BigQuery Performance
-
-The final order models are partitioned by `order_date` and clustered
-by `client_id`.
-
-Partitioning helps reduce data scanned by time-based queries.
-Clustering supports customer-level queries used in the segmentation
-logic.
-
-## LookML
-
-The LookML semantic layer exposes business-oriented dimensions and
-measures such as:
-
-- Orders
-- Total products
-- Average products per order
-- Customer segmentation
-- Order date
-
-Technical fields are hidden where appropriate and business
-definitions are included in descriptions to provide context for
-natural-language queries.
+This project implements an end-to-end analytics solution for e-commerce order data, including data transformation with dbt, data quality testing, customer segmentation and a Looker Studio dashboard.
 
 ## Dashboard
 
-The dashboard focuses on:
+[View the Looker Studio Dashboard](PASTE_YOUR_LOOKER_STUDIO_LINK_HERE)
 
-- Order volume
-- Product volume
-- Average products per order
+## Project Structure
+
+### Part 1 — Data Transformation
+
+The data transformation pipeline was developed using dbt following a Staging → Intermediate → Marts architecture.
+
+The project includes:
+
+- Staging models for orders and sales
+- Intermediate order-level metrics
+- Order-level fact tables
+- 2025–2026 order dataset
+- 2026 customer segmentation
+- Monthly 2026 aggregation
+- Generic data quality tests
+- Singular business logic test for order segmentation
+
+### Part 2 — LookML
+
+The repository also contains the LookML structure required for Looker deployment, including:
+
+- Model file
+- Explores
+- Order-level view
+- Monthly aggregation view
+- Business dimensions
+- Measures
 - Customer segmentation
-- New vs Returning vs VIP customers
-- Monthly trends
+- Descriptions for business-facing fields
 
+### Part 3 — Design Challenge
+
+The marketing e-commerce dashboard was designed in Looker Studio to monitor:
+
+- Orders
+- Net Revenue
+- Average Order Value
+- Customers
+- Daily Revenue
+- Daily Orders
+- Monthly Revenue
+- Customer Segmentation
+- Sales Forecast
+
+## Data Quality
+
+An orphan sales record was identified in the source data. The order-level model uses the orders dataset as the master order table and a left join to sales, preventing unmatched sales records from creating invalid orders.
+
+## Key 2026 Results
+
+- Total orders: 2,573
+- New customers/orders: 1,087
+- Returning: 794
+- VIP: 692
+- Highest monthly order volume: November
+- Highest average products per order: April
+
+## dbt Validation
+
+The final dbt build completed successfully with:
+
+- 7 models
+- 54 data tests
+- 61 total build steps
+- 0 errors
+- 0 warnings
+
+## Repository
+
+This repository contains the complete technical implementation for the coding and LookML challenges.
