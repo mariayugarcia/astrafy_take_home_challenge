@@ -1,11 +1,13 @@
 WITH source AS (
 
     SELECT
+        PARSE_DATE('%Y-%m-%d', date_date) AS sales_date,
+        customer_id,
         order_id,
-        product_id,
-        quantity
-
-    FROM {{ source('raw', 'sales') }}
+        products_id AS product_id,
+        net_sales,
+        qty
+    FROM {{ source('raw', 'sales_recrutement') }}
 
 )
 
