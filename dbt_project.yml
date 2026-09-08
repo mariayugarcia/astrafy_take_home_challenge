@@ -1,20 +1,23 @@
 name: 'astrafy_take_home'
 version: '1.0.0'
+config-version: 2
+
 profile: 'astrafy_take_home'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
+seed-paths: ["seeds"]
 macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
 
 models:
   astrafy_take_home:
     staging:
       +materialized: view
-    intermediate:
-      +materialized: view
     marts:
       +materialized: table
-
-vars:
-  target_year: 2026
