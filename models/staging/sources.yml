@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: raw
-    database: PROJECT_1
-    schema: DATASET_1
+    database: astrafy-take-home-508017
+    schema: raw
 
     tables:
       - name: orders_recrutement
