@@ -1,16 +1,13 @@
-WITH source AS (
+{{ config(materialized='view') }}
 
-    SELECT
-        PARSE_DATE('%Y-%m-%d', date_date) AS sales_date,
-        customer_id,
-        order_id,
-        products_id AS product_id,
-        net_sales,
-        qty
-    FROM {{ source('raw', 'sales_recrutement') }}
-
+SELECT
+    CAST(date_date AS DATE) AS sales_date,
+    CAST(customer_id AS VARCHAR) AS customer_id,
+    CAST(order_id AS VARCHAR) AS order_id,
+    CAST(products_id AS VARCHAR) AS product_id,
+    CAST(net_sales AS DOUBLE) AS net_sales,
+    CAST(qty AS INTEGER) AS quantity
+FROM read_csv_auto(
+    'C:/Users/ymari/OneDrive/Documentos/astrafy-take-home/data/sales_recrutement.csv',
+    header=true
 )
-
-SELECT *
-FROM source
-WHERE order_id IS NOT NULL

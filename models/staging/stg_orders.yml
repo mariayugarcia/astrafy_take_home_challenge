@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: >
+      Staging model for the raw orders dataset. Standardizes data types and
+      renames source columns to business-friendly names.
+
+    columns:
+      - name: order_date
+        description: Date on which the order was created.
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: Unique identifier of the customer.
+        data_tests:
+          - not_null
+
+      - name: order_id
+        description: Unique identifier of the order.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: net_sales
+        description: Net sales amount recorded for the order.
+        data_tests:
+          - not_null
