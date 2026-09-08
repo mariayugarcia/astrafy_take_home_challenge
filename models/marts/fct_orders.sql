@@ -4,13 +4,14 @@
         "data_type": "date",
         "granularity": "month"
     },
-    cluster_by=["client_id"]
+    cluster_by=["customer_id"]
 ) }}
 
 SELECT
     o.order_id,
-    o.client_id,
+    o.customer_id,
     o.order_date,
+    o.net_sales,
     COALESCE(p.qty_product, 0) AS qty_product
 
 FROM {{ ref('stg_orders') }} o
