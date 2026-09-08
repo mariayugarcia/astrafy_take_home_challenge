@@ -1,6 +1,5 @@
 name: 'astrafy_take_home'
 version: '1.0.0'
-
 profile: 'astrafy_take_home'
 
 model-paths: ["models"]
@@ -12,10 +11,8 @@ models:
   astrafy_take_home:
     staging:
       +materialized: view
-
     intermediate:
       +materialized: view
-
     marts:
       +materialized: table
 
