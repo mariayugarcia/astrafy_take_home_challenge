@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      Order-level fact table combining order information with aggregated
+      sales-line information. The model contains one row per order.
+
+    columns:
+      - name: order_date
+        description: Date on which the order was created.
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: Unique identifier of the customer.
+        data_tests:
+          - not_null
+
+      - name: order_id
+        description: Unique identifier of the order.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_net_sales
+        description: Net sales amount recorded in the orders source.
+        data_tests:
+          - not_null
+
+      - name: sales_net_sales
+        description: Net sales amount calculated from the associated sales lines.
+        data_tests:
+          - not_null
+
+      - name: total_quantity
+        description: Total quantity of products sold in the order.
+        data_tests:
+          - not_null
+
+      - name: distinct_products
+        description: Number of distinct products included in the order.
+        data_tests:
+          - not_null

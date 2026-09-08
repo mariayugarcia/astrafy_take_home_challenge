@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fct_orders_2026_segmented
+    description: >
+      Order-level fact table for 2026 orders enriched with customer order
+      history and dynamic New, Returning, or VIP segmentation based on the
+      number of orders placed by the customer during the preceding 12 months.
+
+    columns:
+      - name: order_id
+        description: Unique identifier of the order.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: Unique identifier of the customer.
+        data_tests:
+          - not_null
+
+      - name: order_date
+        description: Date on which the order was created.
+        data_tests:
+          - not_null
+
+      - name: order_net_sales
+        description: Net sales amount recorded at order level.
+        data_tests:
+          - not_null
+
+      - name: sales_net_sales
+        description: Net sales amount calculated from sales lines.
+        data_tests:
+          - not_null
+
+      - name: qty_product
+        description: Total quantity of products included in the order.
+        data_tests:
+          - not_null
+
+      - name: distinct_products
+        description: Number of distinct products included in the order.
+        data_tests:
+          - not_null
+
+      - name: previous_orders_12m
+        description: >
+          Number of orders placed by the same customer during the 12 months
+          preceding the current order.
+        data_tests:
+          - not_null
+
+      - name: order_segmentation
+        description: >
+          Customer order-frequency segment. New customers have no previous
+          order in the preceding 12 months, Returning customers have 1 to 3
+          previous orders, and VIP customers have 4 or more previous orders.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - New
+                  - Returning
+                  - VIP

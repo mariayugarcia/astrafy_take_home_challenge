@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: agg_orders_2026_monthly
+    description: >
+      Monthly aggregation of 2026 order activity. The model provides business
+      KPIs including order volume, products sold, average products per order,
+      total revenue, and average order value.
+
+    columns:
+      - name: order_month
+        description: Month in which the orders were created.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_orders
+        description: Total number of orders placed during the month.
+        data_tests:
+          - not_null
+
+      - name: total_products
+        description: Total quantity of products sold during the month.
+        data_tests:
+          - not_null
+
+      - name: avg_products_per_order
+        description: Average quantity of products per order during the month.
+        data_tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total order revenue during the month.
+        data_tests:
+          - not_null
+
+      - name: avg_order_value
+        description: Average order value during the month.
+        data_tests:
+          - not_null
