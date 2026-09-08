@@ -6,7 +6,7 @@ This project implements an end-to-end analytics solution for e-commerce order da
 
 ## Dashboard
 
-[View the Looker Studio Dashboard](PASTE_YOUR_LOOKER_STUDIO_LINK_HERE)
+[View the Looker Studio Dashboard](https://datastudio.google.com/reporting/0c89a31e-95ed-4b74-b0b0-07c16ae5e585)
 
 ## Project Structure
 
