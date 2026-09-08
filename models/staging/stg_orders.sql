@@ -1,11 +1,11 @@
 WITH source AS (
 
     SELECT
-        order_id,
-        client_id,
-        DATE(order_date) AS order_date
-
-    FROM {{ source('raw', 'orders') }}
+        orders_id AS order_id,
+        customers_id AS customer_id,
+        date_date AS order_date,
+        net_sales
+    FROM {{ source('raw', 'orders_recrutement') }}
 
 )
 
