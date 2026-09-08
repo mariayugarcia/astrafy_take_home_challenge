@@ -2,7 +2,7 @@ WITH order_products AS (
 
     SELECT
         order_id,
-        SUM(quantity) AS qty_product
+        SUM(qty) AS qty_product
 
     FROM {{ ref('stg_sales') }}
 
