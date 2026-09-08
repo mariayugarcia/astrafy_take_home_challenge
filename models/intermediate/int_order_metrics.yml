@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: int_order_metrics
+    description: >
+      Intermediate order-level model that combines the orders source with
+      aggregated sales-line metrics. It provides one row per order and is
+      reused by downstream order-level marts.
+
+    columns:
+      - name: order_date
+        description: Date on which the order was created.
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: Unique identifier of the customer.
+        data_tests:
+          - not_null
+
+      - name: order_id
+        description: Unique identifier of the order.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_net_sales
+        description: Net sales amount recorded in the orders source.
+        data_tests:
+          - not_null
+
+      - name: sales_net_sales
+        description: Net sales amount calculated from the associated sales lines.
+        data_tests:
+          - not_null
+
+      - name: qty_product
+        description: Total quantity of products included in the order.
+        data_tests:
+          - not_null
+
+      - name: distinct_products
+        description: Number of distinct products included in the order.
+        data_tests:
+          - not_null
